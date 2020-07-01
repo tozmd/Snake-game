@@ -21,7 +21,6 @@ public class SnakeMain extends ApplicationAdapter {
 	Rectangle snakeHitbox;
 	Rectangle foodHitbox;
 	BitmapFont font;
-	float clock = 0;
 	Array<SnakeBody> snakeBodies;
 
 	@Override
@@ -86,7 +85,7 @@ public class SnakeMain extends ApplicationAdapter {
 		font.draw(batch, "Pies Eaten: " + counter, 10, 670);
 		batch.end();
 		clock += Gdx.graphics.getRawDeltaTime();
-		if (clock > 0.35) {
+		if(clock>0.25) {
 			move();
 			updateBody();
 			clock = 0;
@@ -100,23 +99,28 @@ public class SnakeMain extends ApplicationAdapter {
 	}
 
 	public void inputToMovement() {
-		if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.W)&&!DirectionToMove.equals(direction.MOVE_DOWN)&&moved) {
 			DirectionToMove = direction.MOVE_UP;
+			moved = false;
 		}
-		if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.A)&&!DirectionToMove.equals(direction.MOVE_RIGHT)&&moved) {
 			DirectionToMove = direction.MOVE_LEFT;
+			moved = false;
 		}
-		if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.S)&&!DirectionToMove.equals(direction.MOVE_UP)&&moved) {
 			DirectionToMove = direction.MOVE_DOWN;
+			moved = false;
 		}
-		if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+		if (Gdx.input.isKeyPressed(Input.Keys.D)&&!DirectionToMove.equals(direction.MOVE_LEFT)&&moved) {
 			DirectionToMove = direction.MOVE_RIGHT;
+			moved = false;
 		}
 	}
 
 	public void collideWithWall(){
 		if(snakeHitbox.x<0 || snakeHitbox.x>680 || snakeHitbox.y<0 || snakeHitbox.y>680){
 			DirectionToMove = direction.STATIONARY;
+
 		}
 	}
 
@@ -127,18 +131,22 @@ public class SnakeMain extends ApplicationAdapter {
 			case MOVE_UP:
 				snakeHead = snakeUp;
 				snakeHitbox.y += 40;
+				moved = true;
 				break;
 			case MOVE_DOWN:
 				snakeHead = snakeDown;
 				snakeHitbox.y -= 40;
+				moved = true;
 				break;
 			case MOVE_RIGHT:
 				snakeHead = snakeRight;
 				snakeHitbox.x += 40;
+				moved = true;
 				break;
 			case MOVE_LEFT:
 				snakeHead = snakeLeft;
 				snakeHitbox.x -= 40;
+				moved = true;
 				break;
 		}
 	}
@@ -190,20 +198,21 @@ public class SnakeMain extends ApplicationAdapter {
 
 	public void updateBody(){
 			for(int i = snakeLength;i>=0;i--){
-				if(i==0 && !snakeBodies.isEmpty()){
-					snakeBodies.get(0).setNewPos(oldSnakeHeadX,oldSnakeHeadY);
+				if (i == 0 && !snakeBodies.isEmpty()) {
+					snakeBodies.get(0).setNewPos(oldSnakeHeadX, oldSnakeHeadY);
 					snakeBodies.get(0).setDirection(DirectionToMove);
-				}
-				else if(i>0){
-					snakeBodies.get(i).setNewPos(snakeBodies.get(i-1).snakeBodyX,snakeBodies.get(i-1).snakeBodyY);
-					snakeBodies.get(i).setDirection(snakeBodies.get(i-1).getDirection());
+				} else if (i > 0) {
+					snakeBodies.get(i).setNewPos(snakeBodies.get(i - 1).snakeBodyX, snakeBodies.get(i - 1).snakeBodyY);
+					snakeBodies.get(i).setDirection(snakeBodies.get(i - 1).getDirection());
 				}
 			}
 		}
 
 		private static int counter = 0;
 		private static int snakeLength = 0;
+		public boolean moved = true;
 		private float oldSnakeHeadX;
 		private float oldSnakeHeadY;
+		private float clock;
 		private static direction DirectionToMove=direction.STATIONARY;
 	}
