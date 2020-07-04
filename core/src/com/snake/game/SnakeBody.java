@@ -12,7 +12,7 @@ public class SnakeBody{
         snakeBodyY = y;
         directionToMove=direction;
         newSnakeBody = new Rectangle();
-        newSnakeBody.setPosition(snakeBodyX,snakeBodyY);
+        newSnakeBody.set(snakeBodyX,snakeBodyY,40,40);
     }
 
     public direction getDirection(){

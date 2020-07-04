@@ -17,7 +17,6 @@ public class SnakeGame extends Game {
     SpriteBatch batch;
     Rectangle snakeHitbox;
     Rectangle foodHitbox;
-    BitmapFont font;
     Array<SnakeBody> snakeBodies;
 
     public void create() {
@@ -40,20 +39,18 @@ public class SnakeGame extends Game {
         gameOverMessage = new Texture(Gdx.files.internal("gameovermsg.png"));
         gameOverTitle = new Texture(Gdx.files.internal("gameover.png"));
         snakeBodies = new <SnakeBody>Array(288);
-        font = new BitmapFont();
-        font.setColor(Color.BLACK);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 680, 680);
         snakeHitbox = new Rectangle();
         snakeHitbox.set(360,360,40,40);
         foodHitbox = new Rectangle();
         foodHitbox.set(120,120,40,40);
+
         setScreen(new TitleScreen(this));
 }
 
     @Override
     public void dispose(){
         batch.dispose();
-        font.dispose();
     }
 }

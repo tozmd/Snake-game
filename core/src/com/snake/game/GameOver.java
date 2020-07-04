@@ -16,7 +16,6 @@ public class GameOver extends ScreenAdapter {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(new InputAdapter() {
-
             @Override
             public boolean keyDown(int keyCode) {
                 if (keyCode == Input.Keys.SPACE) {
