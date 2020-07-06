@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.math.RandomXS128;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
 import static com.badlogic.gdx.math.MathUtils.random;
@@ -39,7 +41,7 @@ public class GameScreen extends ScreenAdapter {
 
 		game.batch.end();
 		clock += Gdx.graphics.getRawDeltaTime();
-		if(clock>0.25) {
+		if(clock>0.18) {
 			move();
 			if(!DirectionToMove.equals(direction.STATIONARY)) {
 				updateBody();
@@ -104,16 +106,10 @@ public class GameScreen extends ScreenAdapter {
 				game.setScreen(new GameOver(game));
 			}
 		}
-		if(game.snakeHitbox.x<0 || game.snakeHitbox.x>680 || game.snakeHitbox.y<0 || game.snakeHitbox.y>680){
+		if(game.snakeHitbox.x<0 || game.snakeHitbox.x>=680 || game.snakeHitbox.y<0 || game.snakeHitbox.y>=680){
 			gameReset();
 			game.setScreen(new GameOver(game));
 		}
-	}
-
-	public void disappear(){
-		game.snakeHead = game.transparentBG;
-		game.snakeBody = game.transparentBG;
-		game.snakeFood = game.transparentBG;
 	}
 
 	public void gameReset(){
@@ -126,21 +122,17 @@ public class GameScreen extends ScreenAdapter {
 	}
 
 	public void inputToMovement() {
-		if (Gdx.input.isKeyPressed(Input.Keys.W)&&!DirectionToMove.equals(direction.MOVE_DOWN)&&moved) {
+		if (Gdx.input.isKeyPressed(Input.Keys.W) && !game.snakeBodies.get(0).getDirection().equals(direction.MOVE_DOWN)){
 			DirectionToMove = direction.MOVE_UP;
-			moved = false;
 		}
-		if (Gdx.input.isKeyPressed(Input.Keys.A)&&!DirectionToMove.equals(direction.MOVE_RIGHT)&&moved) {
-			DirectionToMove = direction.MOVE_LEFT;
-			moved = false;
-		}
-		if (Gdx.input.isKeyPressed(Input.Keys.S)&&!DirectionToMove.equals(direction.MOVE_UP)&&moved) {
+		if (Gdx.input.isKeyPressed(Input.Keys.S) && !game.snakeBodies.get(0).getDirection().equals(direction.MOVE_UP)) {
 			DirectionToMove = direction.MOVE_DOWN;
-			moved = false;
 		}
-		if (Gdx.input.isKeyPressed(Input.Keys.D)&&!DirectionToMove.equals(direction.MOVE_LEFT)&&moved) {
+		if (Gdx.input.isKeyPressed(Input.Keys.A) && !game.snakeBodies.get(0).getDirection().equals(direction.MOVE_RIGHT)){
+			DirectionToMove = direction.MOVE_LEFT;
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.D) && !game.snakeBodies.get(0).getDirection().equals(direction.MOVE_LEFT)){
 			DirectionToMove = direction.MOVE_RIGHT;
-			moved = false;
 		}
 	}
 
@@ -151,22 +143,18 @@ public class GameScreen extends ScreenAdapter {
 			case MOVE_UP:
 				game.snakeHead = game.snakeUp;
 				game.snakeHitbox.y += 40;
-				moved = true;
 				break;
 			case MOVE_DOWN:
 				game.snakeHead = game.snakeDown;
 				game.snakeHitbox.y -= 40;
-				moved = true;
 				break;
 			case MOVE_RIGHT:
 				game.snakeHead = game.snakeRight;
 				game.snakeHitbox.x += 40;
-				moved = true;
 				break;
 			case MOVE_LEFT:
 				game.snakeHead = game.snakeLeft;
 				game.snakeHitbox.x -= 40;
-				moved = true;
 				break;
 		}
 	}
@@ -174,8 +162,32 @@ public class GameScreen extends ScreenAdapter {
 	public void moveFood(){
 		if(game.foodHitbox.overlaps(game.snakeHitbox))
 		{
-			game.foodHitbox.setPosition(random(0,16)*40,random(0,16)*40);
 			addBody(1);
+			float randomX = random(0,16)*40;
+			float randomY = random(0,16)*40;
+			randomizeFoodPos(randomX, randomY);
+			game.foodHitbox.setPosition(randomX,randomY);
+		}
+	}
+
+	public void randomizeFoodPos(float x, float y) {
+		if (x == game.snakeHitbox.x && y == game.snakeHitbox.y) {
+			x = random(0, 16) * 40;
+			y = random(0, 16) * 40;
+		}
+		for (SnakeBody s : game.snakeBodies) {
+			if (x == s.snakeBodyX && y == s.snakeBodyY) {
+				x = random(0, 16) * 40;
+				y = random(0, 16) * 40;
+			}
+		}
+		if (x == game.snakeHitbox.x && y == game.snakeHitbox.y) {
+			randomizeFoodPos(x, y);
+		}
+		for (SnakeBody s : game.snakeBodies) {
+			if (x == s.snakeBodyX && y == s.snakeBodyY) {
+				randomizeFoodPos(x,y);
+			}
 		}
 	}
 
@@ -193,9 +205,7 @@ public class GameScreen extends ScreenAdapter {
 		}
 
 		private float clock;
-
-		private static direction DirectionToMove=direction.STATIONARY;
-		public boolean moved = true;
+		private static direction DirectionToMove = direction.STATIONARY;
 		private static int snakeLength = 0;
 		private float oldSnakeHeadX;
 		private float oldSnakeHeadY;

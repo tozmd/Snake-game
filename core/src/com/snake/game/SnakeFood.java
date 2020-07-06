@@ -12,9 +12,4 @@ public class SnakeFood {
         foodPosX=x;
         foodPosY=y;
     }
-
-    public void moveFood(){
-        foodPosX = random(0,17)*40;
-        foodPosY = random(0,17)*40;
-    }
 }
