@@ -2,7 +2,6 @@ package com.snake.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.snake.game.GameScreen;
 import com.snake.game.SnakeGame;
 
 public class DesktopLauncher {
