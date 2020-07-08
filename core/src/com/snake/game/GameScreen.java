@@ -35,19 +35,19 @@ public class GameScreen extends ScreenAdapter {
 		for (int i = 0; i < snakeLength; i++) {
 			game.batch.draw(game.snakeBody, game.snakeBodies.get(i).snakeBodyX, game.snakeBodies.get(i).snakeBodyY);
 		}
-		moveFood();
-		inputToMovement();
-		collisionDetection();
 
 		game.batch.end();
 		clock += Gdx.graphics.getRawDeltaTime();
-		if(clock>0.18) {
+		if(clock>0.15) {
 			move();
 			if(!DirectionToMove.equals(direction.STATIONARY)) {
 				updateBody();
 			}
 			clock = 0;
 		}
+		moveFood();
+		inputToMovement();
+		collisionDetection();
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public class GameScreen extends ScreenAdapter {
 
 	public void gameReset(){
 		game.snakeHitbox.setPosition(360,360);
-		game.foodHitbox.setPosition(40,40);
+		game.foodHitbox.setPosition(120,120);
 		game.snakeBodies.clear();
 		DirectionToMove = direction.STATIONARY;
 		game.snakeHead = game.snakeLeft;
@@ -163,30 +163,30 @@ public class GameScreen extends ScreenAdapter {
 		if(game.foodHitbox.overlaps(game.snakeHitbox))
 		{
 			addBody(1);
-			float randomX = random(0,16)*40;
-			float randomY = random(0,16)*40;
-			randomizeFoodPos(randomX, randomY);
-			game.foodHitbox.setPosition(randomX,randomY);
+			if(snakeLength == 288){
+				game.setScreen(new WinScreen(game));
+			}
+			else{
+				randomizeFoodPos();
+			}
 		}
 	}
 
-	public void randomizeFoodPos(float x, float y) {
-		if (x == game.snakeHitbox.x && y == game.snakeHitbox.y) {
-			x = random(0, 16) * 40;
-			y = random(0, 16) * 40;
+	public void randomizeFoodPos() {
+		if (game.foodHitbox.overlaps(game.snakeHitbox)) {
+			game.foodHitbox.setPosition(random(0, 16) * 40,random(0, 16) * 40);
 		}
 		for (SnakeBody s : game.snakeBodies) {
-			if (x == s.snakeBodyX && y == s.snakeBodyY) {
-				x = random(0, 16) * 40;
-				y = random(0, 16) * 40;
+			if (game.foodHitbox.overlaps(s.newSnakeBody)) {
+				game.foodHitbox.setPosition(random(0, 16) * 40,random(0, 16) * 40);
 			}
 		}
-		if (x == game.snakeHitbox.x && y == game.snakeHitbox.y) {
-			randomizeFoodPos(x, y);
+		if (game.foodHitbox.overlaps(game.snakeHitbox)){
+			randomizeFoodPos();
 		}
 		for (SnakeBody s : game.snakeBodies) {
-			if (x == s.snakeBodyX && y == s.snakeBodyY) {
-				randomizeFoodPos(x,y);
+			if (game.foodHitbox.overlaps(s.newSnakeBody)) {
+				randomizeFoodPos();
 			}
 		}
 	}

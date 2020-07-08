@@ -9,13 +9,15 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 
 public class SnakeGame extends Game {
-    Texture background, snakeLeft, snakeRight, snakeUp, snakeDown, snakeFood, snakeHead, snakeBody, snakeTitle, creatorName, gameMsg, gameMessage, gameOverMsg, gameOverMessage, gameOverTitle, transparentBG;
+    Texture background, snakeLeft, snakeRight, snakeUp, snakeDown, snakeFood, snakeHead, snakeBody, snakeTitle, creatorName, gameMsg, gameMessage, gameOverMsg, gameOverMessage, gameOverTitle, transparentBG, winTitle;
     SnakeFood food;
     OrthographicCamera camera;
     SpriteBatch batch;
     Rectangle snakeHitbox;
     Rectangle foodHitbox;
     Array<SnakeBody> snakeBodies;
+    float randomX;
+    float randomY;
 
     public void create() {
         batch = new SpriteBatch();
@@ -36,6 +38,7 @@ public class SnakeGame extends Game {
         gameOverMsg = new Texture(Gdx.files.internal("gameovermsg.png"));
         gameOverMessage = new Texture(Gdx.files.internal("gameovermsg.png"));
         gameOverTitle = new Texture(Gdx.files.internal("gameover.png"));
+        winTitle = new Texture(Gdx.files.internal("victoryscreen.png"));
         snakeBodies = new <SnakeBody>Array(288);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 680, 680);
