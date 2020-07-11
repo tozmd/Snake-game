@@ -4,10 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.math.RandomXS128;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.Array;
-
+import com.snake.game.snakemodel.SnakeBody;
 import static com.badlogic.gdx.math.MathUtils.random;
 
 
@@ -33,7 +30,7 @@ public class GameScreen extends ScreenAdapter {
 			addBody(2);
 		}
 		for (int i = 0; i < snakeLength; i++) {
-			game.batch.draw(game.snakeBody, game.snakeBodies.get(i).snakeBodyX, game.snakeBodies.get(i).snakeBodyY);
+			game.batch.draw(game.snakeBody, game.snakeBodies.get(i).getX(), game.snakeBodies.get(i).getY());
 		}
 
 		game.batch.end();
@@ -59,39 +56,39 @@ public class GameScreen extends ScreenAdapter {
 		for (int i = 0; i < numberToAdd; i++) {
 			if (game.snakeBodies.isEmpty()) {
 				if(DirectionToMove.equals(direction.STATIONARY)){
-					SnakeBody newSnakeBody = new SnakeBody(direction.STATIONARY, game.snakeHitbox.x + 40, game.snakeHitbox.y);
+					com.snake.game.snakemodel.SnakeBody newSnakeBody = new com.snake.game.snakemodel.SnakeBody(direction.STATIONARY, game.snakeHitbox.x + 40, game.snakeHitbox.y);
 					game.snakeBodies.add(newSnakeBody);
 				}
 				else if (DirectionToMove.equals(direction.MOVE_LEFT)) {
-					SnakeBody newSnakeBody = new SnakeBody(direction.MOVE_LEFT, game.snakeHitbox.x + 40, game.snakeHitbox.y);
+					com.snake.game.snakemodel.SnakeBody newSnakeBody = new com.snake.game.snakemodel.SnakeBody(direction.MOVE_LEFT, game.snakeHitbox.x + 40, game.snakeHitbox.y);
 					game.snakeBodies.add(newSnakeBody);
 				} else if (DirectionToMove.equals(direction.MOVE_RIGHT)) {
-					SnakeBody newSnakeBody = new SnakeBody(direction.MOVE_RIGHT, game.snakeHitbox.x - 40, game.snakeHitbox.y);
+					com.snake.game.snakemodel.SnakeBody newSnakeBody = new com.snake.game.snakemodel.SnakeBody(direction.MOVE_RIGHT, game.snakeHitbox.x - 40, game.snakeHitbox.y);
 					game.snakeBodies.add(newSnakeBody);
 				} else if (DirectionToMove.equals(direction.MOVE_DOWN)) {
-					SnakeBody newSnakeBody = new SnakeBody(direction.MOVE_DOWN, game.snakeHitbox.x, game.snakeHitbox.y + 40);
+					com.snake.game.snakemodel.SnakeBody newSnakeBody = new com.snake.game.snakemodel.SnakeBody(direction.MOVE_DOWN, game.snakeHitbox.x, game.snakeHitbox.y + 40);
 					game.snakeBodies.add(newSnakeBody);
 				} else if (DirectionToMove.equals(direction.MOVE_UP)) {
-					SnakeBody newSnakeBody = new SnakeBody(direction.MOVE_UP, game.snakeHitbox.x, game.snakeHitbox.y - 40);
+					com.snake.game.snakemodel.SnakeBody newSnakeBody = new com.snake.game.snakemodel.SnakeBody(direction.MOVE_UP, game.snakeHitbox.x, game.snakeHitbox.y - 40);
 					game.snakeBodies.add(newSnakeBody);
 				}
 			}
 			if (!game.snakeBodies.isEmpty()) {
 				if (game.snakeBodies.get(snakeLength).getDirection().equals(direction.STATIONARY)) {
-					SnakeBody newSnakeBody = new SnakeBody(direction.STATIONARY, game.snakeBodies.get(snakeLength).snakeBodyX + 40, game.snakeBodies.get(snakeLength).snakeBodyY);
+					com.snake.game.snakemodel.SnakeBody newSnakeBody = new com.snake.game.snakemodel.SnakeBody(direction.STATIONARY, game.snakeBodies.get(snakeLength).getX() + 40, game.snakeBodies.get(snakeLength).getY());
 					game.snakeBodies.add(newSnakeBody);
 				}
 				else if (game.snakeBodies.get(snakeLength).getDirection().equals(direction.MOVE_LEFT)) {
-					SnakeBody newSnakeBody = new SnakeBody(direction.MOVE_LEFT, game.snakeBodies.get(snakeLength).snakeBodyX + 40, game.snakeBodies.get(snakeLength).snakeBodyY);
+					com.snake.game.snakemodel.SnakeBody newSnakeBody = new com.snake.game.snakemodel.SnakeBody(direction.MOVE_LEFT, game.snakeBodies.get(snakeLength).getX() + 40, game.snakeBodies.get(snakeLength).getY());
 					game.snakeBodies.add(newSnakeBody);
 				} else if (game.snakeBodies.get(snakeLength).getDirection().equals(direction.MOVE_RIGHT)) {
-					SnakeBody newSnakeBody = new SnakeBody(direction.MOVE_RIGHT, game.snakeBodies.get(snakeLength).snakeBodyX - 40, game.snakeBodies.get(snakeLength).snakeBodyY);
+					com.snake.game.snakemodel.SnakeBody newSnakeBody = new com.snake.game.snakemodel.SnakeBody(direction.MOVE_RIGHT, game.snakeBodies.get(snakeLength).getX() - 40, game.snakeBodies.get(snakeLength).getY());
 					game.snakeBodies.add(newSnakeBody);
 				} else if (game.snakeBodies.get(snakeLength).getDirection().equals(direction.MOVE_DOWN)) {
-					SnakeBody newSnakeBody = new SnakeBody(direction.MOVE_DOWN, game.snakeBodies.get(snakeLength).snakeBodyX, game.snakeBodies.get(snakeLength).snakeBodyY + 40);
+					com.snake.game.snakemodel.SnakeBody newSnakeBody = new com.snake.game.snakemodel.SnakeBody(direction.MOVE_DOWN, game.snakeBodies.get(snakeLength).getX(), game.snakeBodies.get(snakeLength).getY() + 40);
 					game.snakeBodies.add(newSnakeBody);
 				} else if (game.snakeBodies.get(snakeLength).getDirection().equals(direction.MOVE_UP)) {
-					SnakeBody newSnakeBody = new SnakeBody(direction.MOVE_UP, game.snakeBodies.get(snakeLength).snakeBodyX, game.snakeBodies.get(snakeLength).snakeBodyY - 40);
+					com.snake.game.snakemodel.SnakeBody newSnakeBody = new com.snake.game.snakemodel.SnakeBody(direction.MOVE_UP, game.snakeBodies.get(snakeLength).getX(), game.snakeBodies.get(snakeLength).getY() - 40);
 					game.snakeBodies.add(newSnakeBody);
 				}
 			}
@@ -100,8 +97,8 @@ public class GameScreen extends ScreenAdapter {
 	}
 
 	public void collisionDetection(){
-		for(SnakeBody snakebody:game.snakeBodies){
-			if(game.snakeHitbox.overlaps(snakebody.newSnakeBody)){
+		for(SnakeBody s : game.snakeBodies){
+			if(game.snakeHitbox.overlaps(s)){
 				gameReset();
 				game.setScreen(new GameOver(game));
 			}
@@ -177,7 +174,7 @@ public class GameScreen extends ScreenAdapter {
 			game.foodHitbox.setPosition(random(0, 16) * 40,random(0, 16) * 40);
 		}
 		for (SnakeBody s : game.snakeBodies) {
-			if (game.foodHitbox.overlaps(s.newSnakeBody)) {
+			if (game.foodHitbox.overlaps(s)) {
 				game.foodHitbox.setPosition(random(0, 16) * 40,random(0, 16) * 40);
 			}
 		}
@@ -185,7 +182,7 @@ public class GameScreen extends ScreenAdapter {
 			randomizeFoodPos();
 		}
 		for (SnakeBody s : game.snakeBodies) {
-			if (game.foodHitbox.overlaps(s.newSnakeBody)) {
+			if (game.foodHitbox.overlaps(s)) {
 				randomizeFoodPos();
 			}
 		}
@@ -195,10 +192,10 @@ public class GameScreen extends ScreenAdapter {
 	public void updateBody(){
 			for(int i = snakeLength; i>=0; i--){
 				if (i == 0 && !game.snakeBodies.isEmpty()) {
-					game.snakeBodies.get(0).setNewPos(oldSnakeHeadX, oldSnakeHeadY);
+					game.snakeBodies.get(0).setPosition(oldSnakeHeadX, oldSnakeHeadY);
 					game.snakeBodies.get(0).setDirection(DirectionToMove);
 				} else if (i > 0) {
-					game.snakeBodies.get(i).setNewPos(game.snakeBodies.get(i - 1).snakeBodyX, game.snakeBodies.get(i - 1).snakeBodyY);
+					game.snakeBodies.get(i).setPosition(game.snakeBodies.get(i - 1).getX(), game.snakeBodies.get(i - 1).getY());
 					game.snakeBodies.get(i).setDirection(game.snakeBodies.get(i - 1).getDirection());
 				}
 			}

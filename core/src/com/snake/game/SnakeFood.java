@@ -12,4 +12,5 @@ public class SnakeFood {
         foodPosX=x;
         foodPosY=y;
     }
+
 }
