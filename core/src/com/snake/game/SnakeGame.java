@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
+import com.snake.game.snakemodel.SnakeBody;
 
 public class SnakeGame extends Game {
     Texture background, snakeLeft, snakeRight, snakeUp, snakeDown, snakeFood, snakeHead, snakeBody, snakeTitle, creatorName, gameMsg, gameMessage, gameOverMsg, gameOverMessage, gameOverTitle, transparentBG, winTitle;
@@ -15,7 +16,7 @@ public class SnakeGame extends Game {
     SpriteBatch batch;
     Rectangle snakeHitbox;
     Rectangle foodHitbox;
-    Array<SnakeBody> snakeBodies;
+    Array<com.snake.game.snakemodel.SnakeBody> snakeBodies;
     float randomX;
     float randomY;
 
