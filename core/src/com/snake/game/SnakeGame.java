@@ -5,32 +5,27 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
-import com.snake.game.snakemodel.SnakeBody;
+import com.snake.game.model.FoodObj;
+import com.snake.game.model.SnakeBody;
+import com.snake.game.model.SnakeHead;
 
 public class SnakeGame extends Game {
-    Texture background, snakeLeft, snakeRight, snakeUp, snakeDown, snakeFood, snakeHead, snakeBody, snakeTitle, creatorName, gameMsg, gameMessage, gameOverMsg, gameOverMessage, gameOverTitle, transparentBG, winTitle;
-    SnakeFood food;
+    Texture background, snakeLeftTex, snakeRightTex, snakeUpTex, snakeDownTex, snakeFoodTex, snakeHeadTex, snakeBodyTex,
+            snakeTitle, creatorName, gameMsg, gameMessage, gameOverMsg, gameOverMessage, gameOverTitle, transparentBG, winTitle;
     OrthographicCamera camera;
     SpriteBatch batch;
-    Rectangle snakeHitbox;
-    Rectangle foodHitbox;
-    Array<com.snake.game.snakemodel.SnakeBody> snakeBodies;
-    float randomX;
-    float randomY;
 
     public void create() {
         batch = new SpriteBatch();
-        food = new SnakeFood(240,240);
         background = new Texture(Gdx.files.internal("snakegameboard.jpg"));
-        snakeFood = new Texture(Gdx.files.internal("snakefood.png"));
-        snakeLeft = new Texture(Gdx.files.internal("snakeleft.png"));
-        snakeUp = new Texture(Gdx.files.internal("snakeUp.png"));
-        snakeDown = new Texture(Gdx.files.internal("snakeDown.png"));
-        snakeRight = new Texture(Gdx.files.internal("snakeRight.png"));
-        snakeHead = new Texture(Gdx.files.internal("snakeleft.png"));
-        snakeBody = new Texture(Gdx.files.internal("snakebody.jpg"));
+        snakeFoodTex = new Texture(Gdx.files.internal("snakefood.png"));
+        snakeLeftTex = new Texture(Gdx.files.internal("snakeleft.png"));
+        snakeUpTex = new Texture(Gdx.files.internal("snakeUp.png"));
+        snakeDownTex = new Texture(Gdx.files.internal("snakeDown.png"));
+        snakeRightTex = new Texture(Gdx.files.internal("snakeRight.png"));
+        snakeHeadTex = new Texture(Gdx.files.internal("snakeleft.png"));
+        snakeBodyTex = new Texture(Gdx.files.internal("snakebody.jpg"));
         creatorName = new Texture(Gdx.files.internal("toastmakerr.png"));
         snakeTitle = new Texture(Gdx.files.internal("snaketitle.png"));
         gameMsg = new Texture(Gdx.files.internal("titlescreenmsg.png"));
@@ -40,13 +35,9 @@ public class SnakeGame extends Game {
         gameOverMessage = new Texture(Gdx.files.internal("gameovermsg.png"));
         gameOverTitle = new Texture(Gdx.files.internal("gameover.png"));
         winTitle = new Texture(Gdx.files.internal("victoryscreen.png"));
-        snakeBodies = new <SnakeBody>Array(288);
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 680, 680);
-        snakeHitbox = new Rectangle();
-        snakeHitbox.set(360,360,40,40);
-        foodHitbox = new Rectangle();
-        foodHitbox.set(120,120,40,40);
+
 
         setScreen(new TitleScreen(this));
 }

@@ -1,10 +1,10 @@
-package com.snake.game.snakemodel;
+package com.snake.game.model;
 
 import com.snake.game.direction;
 
-public class SnakeBody extends GameObject{
+public class SnakeObj extends GameObject{
 
-    public SnakeBody(direction dir, float x, float y){
+    public SnakeObj(direction dir, float x, float y){
         super(x,y);
         directionToMove = dir;
     }
