@@ -1,10 +1,11 @@
 package com.snake.game.movement;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Array;
 import com.snake.game.GameOver;
+import com.snake.game.SnakeGame;
+import com.snake.game.model.FoodObj;
 import com.snake.game.model.SnakeBody;
 import com.snake.game.Assets.Assets;
 import com.snake.game.model.SnakeHead;
@@ -90,6 +91,28 @@ public class SnakeController {
             }
             SnakeBody.incrementSnakeLength();
         }
+    }
+
+    public void collisionDetection(SnakeGame game, SnakeHead snakeHead, FoodObj food, Array<SnakeBody> snakeBodies, Assets assets){
+        for(SnakeBody s : snakeBodies){
+            if(snakeHead.overlaps(s)){
+                gameReset(snakeHead, food, snakeBodies, assets);
+                game.setScreen(new GameOver(game));
+            }
+        }
+        if(snakeHead.getX()<0 || snakeHead.getX()>=680 || snakeHead.getY()<0 || snakeHead.getY()>=680){
+            gameReset(snakeHead, food, snakeBodies, assets);
+            game.setScreen(new GameOver(game));
+        }
+    }
+
+    public void gameReset(SnakeHead snakeHead, FoodObj food, Array<SnakeBody> snakeBodies, Assets assets){
+        snakeHead.setPosition(360,360);
+        food.setPosition(120,120);
+        snakeBodies.clear();
+        setDir(direction.STATIONARY);
+        assets.snakeHeadTex = assets.snakeLeftTex;
+        SnakeBody.setSnakeLength(0);
     }
 
     public void updateBody(Array<SnakeBody> snakeBodies, SnakeHead snakeHead){

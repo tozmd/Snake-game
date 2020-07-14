@@ -1,17 +1,15 @@
 package com.snake.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Array;
 import com.snake.game.model.FoodObj;
 import com.snake.game.model.SnakeBody;
 import com.snake.game.model.SnakeHead;
+import com.snake.game.movement.FoodController;
 import com.snake.game.movement.SnakeController;
 import com.snake.game.movement.direction;
-import static com.badlogic.gdx.math.MathUtils.random;
-
 
 public class GameScreen extends ScreenAdapter {
 	SnakeGame game;
@@ -19,7 +17,7 @@ public class GameScreen extends ScreenAdapter {
 	FoodObj food;
 	Array<SnakeBody> snakeBodies;
 	SnakeController controller;
-
+	FoodController foodRandomizer;
 
 	public GameScreen(SnakeGame game){
 		this.game = game;
@@ -30,6 +28,7 @@ public class GameScreen extends ScreenAdapter {
 		snakeBodies = new <SnakeBody>Array(288);
 		snakeHead = new SnakeHead(direction.MOVE_LEFT, 360,360);
 		food = new FoodObj(120, 120);
+		foodRandomizer = new FoodController();
 		controller = new SnakeController();
 	}
 
@@ -60,71 +59,17 @@ public class GameScreen extends ScreenAdapter {
 			}
 			clock = 0;
 		}
-		moveFood();
+		if(food.overlaps(snakeHead)) {
+			controller.addBody(1, snakeBodies, snakeHead);
+			foodRandomizer.moveFood(game, food, snakeHead, snakeBodies);
+		}
 		controller.inputToMovement(snakeBodies);
-		collisionDetection();
+		controller.collisionDetection(game, snakeHead, food, snakeBodies, game.assets);
 	}
 
 	@Override
 	public void dispose() {
 		game.batch.dispose();
-	}
-
-
-
-	public void collisionDetection(){
-		for(SnakeBody s : snakeBodies){
-			if(snakeHead.overlaps(s)){
-				gameReset();
-				game.setScreen(new GameOver(game));
-			}
-		}
-		if(snakeHead.getX()<0 || snakeHead.getX()>=680 || snakeHead.getY()<0 || snakeHead.getY()>=680){
-			gameReset();
-			game.setScreen(new GameOver(game));
-		}
-	}
-
-	public void gameReset(){
-		snakeHead.setPosition(360,360);
-		food.setPosition(120,120);
-		snakeBodies.clear();
-		controller.setDir(direction.STATIONARY);
-		game.assets.snakeHeadTex = game.assets.snakeLeftTex;
-		SnakeBody.setSnakeLength(0);
-	}
-
-
-	public void moveFood(){
-		if(food.overlaps(snakeHead))
-		{
-			controller.addBody(1, snakeBodies, snakeHead);
-			if(SnakeBody.getSnakeLength() == 288){
-				game.setScreen(new WinScreen(game));
-			}
-			else{
-				randomizeFoodPos();
-			}
-		}
-	}
-
-	public void randomizeFoodPos() {
-		if (food.overlaps(snakeHead)) {
-			food.setPosition(random(0, 16) * 40,random(0, 16) * 40);
-		}
-		for (SnakeBody s : snakeBodies) {
-			if (food.overlaps(s)) {
-				food.setPosition(random(0, 16) * 40,random(0, 16) * 40);
-			}
-		}
-		if (food.overlaps(snakeHead)){
-			randomizeFoodPos();
-		}
-		for (SnakeBody s : snakeBodies) {
-			if (food.overlaps(s)) {
-				randomizeFoodPos();
-			}
-		}
 	}
 
 		private float clock;
