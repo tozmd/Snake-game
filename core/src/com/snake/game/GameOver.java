@@ -32,17 +32,17 @@ public class GameOver extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.begin();
-        game.batch.draw(game.background,0,0);
-        game.batch.draw(game.gameOverTitle,0,0);
-        game.batch.draw(game.gameOverMsg,0,0);
+        game.batch.draw(game.assets.background,0,0);
+        game.batch.draw(game.assets.gameOverTitle,0,0);
+        game.batch.draw(game.assets.gameOverMsg,0,0);
         clock += Gdx.graphics.getDeltaTime();
         if(clock>0.4) {
             msgSwitch *= -1;
             if(msgSwitch<0){
-                game.gameOverMsg = game.transparentBG;
+                game.assets.gameOverMsg = game.assets.transparentBG;
             }
             else if(msgSwitch>0){
-                game.gameOverMsg = game.gameOverMessage;
+                game.assets.gameOverMsg = game.assets.gameOverMessage;
             }
             clock = 0;
         }

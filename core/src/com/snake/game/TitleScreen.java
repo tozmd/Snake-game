@@ -31,18 +31,18 @@ public class TitleScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0, .25f, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
-        game.batch.draw(game.background,0,0);
-        game.batch.draw(game.creatorName,0,0);
-        game.batch.draw(game.snakeTitle,0,0);
-        game.batch.draw(game.gameMsg,0,0);
+        game.batch.draw(game.assets.background,0,0);
+        game.batch.draw(game.assets.creatorName,0,0);
+        game.batch.draw(game.assets.snakeTitle,0,0);
+        game.batch.draw(game.assets.gameMsg,0,0);
         clock += Gdx.graphics.getDeltaTime();
         if(clock>0.4) {
             msgSwitch *= -1;
             if(msgSwitch<0){
-                game.gameMsg = game.transparentBG;
+                game.assets.gameMsg = game.assets.transparentBG;
             }
             else if(msgSwitch>0){
-                game.gameMsg = game.gameMessage;
+                game.assets.gameMsg = game.assets.gameMessage;
             }
             clock = 0;
         }

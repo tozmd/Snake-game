@@ -1,4 +1,4 @@
-package com.snake.game;
+package com.snake.game.movement;
 
 public enum direction {
     STATIONARY,

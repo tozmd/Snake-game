@@ -1,6 +1,6 @@
 package com.snake.game.model;
 
-import com.snake.game.direction;
+import com.snake.game.movement.direction;
 
 public class SnakeHead extends SnakeObj {
     private float prevX;
