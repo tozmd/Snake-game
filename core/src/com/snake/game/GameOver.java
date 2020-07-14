@@ -39,10 +39,10 @@ public class GameOver extends ScreenAdapter {
         if(clock>0.4) {
             msgSwitch *= -1;
             if(msgSwitch<0){
-                game.assets.gameOverMsg = game.assets.transparentBG;
+                game.assets.gameOverMsg = game.assets.gameOverMessage;
             }
             else if(msgSwitch>0){
-                game.assets.gameOverMsg = game.assets.gameOverMessage;
+                game.assets.gameOverMsg = game.assets.transparentBG;
             }
             clock = 0;
         }
