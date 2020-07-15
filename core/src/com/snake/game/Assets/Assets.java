@@ -1,12 +1,18 @@
 package com.snake.game.assets;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.snake.game.SnakeGame;
 
 
 public class Assets {
     public Texture background, snakeLeftTex, snakeRightTex, snakeUpTex, snakeDownTex, snakeFoodTex, snakeHeadTex, snakeBodyTex,
             snakeTitle, creatorName, gameMsg, gameMessage, gameOverMsg, gameOverMessage, gameOverTitle, transparentBG, winTitle;
+    public SnakeGame game;
+    public OrthographicCamera camera;
+    public SpriteBatch batch;
 
     public void loadAssets(){
         background = new Texture(Gdx.files.internal("snakegameboard.jpg"));
@@ -26,5 +32,8 @@ public class Assets {
         gameOverMessage = new Texture(Gdx.files.internal("gameovermsg.png"));
         gameOverTitle = new Texture(Gdx.files.internal("gameover.png"));
         winTitle = new Texture(Gdx.files.internal("victoryscreen.png"));
+        batch = new SpriteBatch();
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, 680, 680);
     }
 }

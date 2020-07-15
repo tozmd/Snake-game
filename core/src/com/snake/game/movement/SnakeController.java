@@ -3,7 +3,7 @@ package com.snake.game.movement;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Array;
-import com.snake.game.GameOver;
+import com.snake.game.screens.GameOver;
 import com.snake.game.SnakeGame;
 import com.snake.game.model.FoodObj;
 import com.snake.game.model.SnakeBody;

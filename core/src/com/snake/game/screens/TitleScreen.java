@@ -1,21 +1,27 @@
-package com.snake.game;
+package com.snake.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
+import com.snake.game.SnakeGame;
+import com.snake.game.assets.Assets;
+import com.snake.game.screens.GameScreen;
 
-
-public class GameOver extends ScreenAdapter {
+public class TitleScreen extends ScreenAdapter {
     SnakeGame game;
-
-    public GameOver(SnakeGame game){
+    Assets assets;
+    public TitleScreen(SnakeGame game){
         this.game = game;
     }
+
     @Override
     public void show() {
+        assets = new Assets();
+        assets.loadAssets();
         Gdx.input.setInputProcessor(new InputAdapter() {
+
             @Override
             public boolean keyDown(int keyCode) {
                 if (keyCode == Input.Keys.SPACE) {
@@ -28,32 +34,32 @@ public class GameOver extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(.25f, 0, 0, 1);
+        Gdx.gl.glClearColor(0, .25f, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        game.batch.begin();
-        game.batch.draw(game.assets.background,0,0);
-        game.batch.draw(game.assets.gameOverTitle,0,0);
-        game.batch.draw(game.assets.gameOverMsg,0,0);
+        assets.batch.begin();
+        assets.batch.draw(assets.background,0,0);
+        assets.batch.draw(assets.creatorName,0,0);
+        assets.batch.draw(assets.snakeTitle,0,0);
+        assets.batch.draw(assets.gameMsg,0,0);
         clock += Gdx.graphics.getDeltaTime();
         if(clock>0.4) {
             msgSwitch *= -1;
             if(msgSwitch<0){
-                game.assets.gameOverMsg = game.assets.gameOverMessage;
+                assets.gameMsg = assets.transparentBG;
             }
             else if(msgSwitch>0){
-                game.assets.gameOverMsg = game.assets.transparentBG;
+                assets.gameMsg = assets.gameMessage;
             }
             clock = 0;
         }
-        game.batch.end();
+        assets.batch.end();
     }
 
     @Override
-    public void hide() {
+    public void hide(){
         Gdx.input.setInputProcessor(null);
+        assets.batch.dispose();
     }
-
     private float clock;
     private float msgSwitch = 1;
 }

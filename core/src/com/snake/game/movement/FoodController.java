@@ -2,11 +2,10 @@ package com.snake.game.movement;
 
 import com.badlogic.gdx.utils.Array;
 import com.snake.game.SnakeGame;
-import com.snake.game.WinScreen;
+import com.snake.game.screens.WinScreen;
 import com.snake.game.model.FoodObj;
 import com.snake.game.model.SnakeBody;
 import com.snake.game.model.SnakeHead;
-import com.snake.game.movement.SnakeController;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 

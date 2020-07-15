@@ -1,9 +1,11 @@
-package com.snake.game;
+package com.snake.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Array;
+import com.snake.game.SnakeGame;
+import com.snake.game.assets.Assets;
 import com.snake.game.model.FoodObj;
 import com.snake.game.model.SnakeBody;
 import com.snake.game.model.SnakeHead;
@@ -18,6 +20,7 @@ public class GameScreen extends ScreenAdapter {
 	Array<SnakeBody> snakeBodies;
 	SnakeController controller;
 	FoodController foodRandomizer;
+	Assets assets;
 
 	public GameScreen(SnakeGame game){
 		this.game = game;
@@ -25,6 +28,8 @@ public class GameScreen extends ScreenAdapter {
 
 	@Override
 	public void show() {
+		assets = new Assets();
+		assets.loadAssets();
 		snakeBodies = new <SnakeBody>Array(288);
 		snakeHead = new SnakeHead(Direction.MOVE_LEFT, 360,360);
 		food = new FoodObj(120, 120);
@@ -37,23 +42,23 @@ public class GameScreen extends ScreenAdapter {
 		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		game.camera.update();
-		game.batch.setProjectionMatrix(game.camera.combined);
-		game.batch.begin();
-		game.batch.draw(game.assets.background, 0, 0);
-		game.batch.draw(game.assets.snakeHeadTex, snakeHead.getX(), snakeHead.getY());
-		game.batch.draw(game.assets.snakeFoodTex, food.getX(), food.getY());
+		assets.camera.update();
+		assets.batch.setProjectionMatrix(assets.camera.combined);
+		assets.batch.begin();
+		assets.batch.draw(assets.background, 0, 0);
+		assets.batch.draw(assets.snakeHeadTex, snakeHead.getX(), snakeHead.getY());
+		assets.batch.draw(assets.snakeFoodTex, food.getX(), food.getY());
 		if(SnakeBody.getSnakeLength() == 0){
 			controller.addBody(2, snakeBodies, snakeHead);
 		}
 		for (int i = 0; i < SnakeBody.getSnakeLength(); i++) {
-			game.batch.draw(game.assets.snakeBodyTex, snakeBodies.get(i).getX(), snakeBodies.get(i).getY());
+			assets.batch.draw(assets.snakeBodyTex, snakeBodies.get(i).getX(), snakeBodies.get(i).getY());
 		}
 
-		game.batch.end();
+		assets.batch.end();
 		clock += Gdx.graphics.getRawDeltaTime();
 		if(clock>0.15) {
-			controller.move(game.assets, snakeHead);
+			controller.move(assets, snakeHead);
 			if(!controller.getDir().equals(Direction.STATIONARY)) {
 				controller.updateBody(snakeBodies, snakeHead);
 			}
@@ -64,12 +69,12 @@ public class GameScreen extends ScreenAdapter {
 			foodRandomizer.moveFood(game, food, snakeHead, snakeBodies);
 		}
 		controller.inputToMovement(snakeBodies);
-		controller.collisionDetection(game, snakeHead, food, snakeBodies, game.assets);
+		controller.collisionDetection(game, snakeHead, food, snakeBodies, assets);
 	}
 
 	@Override
 	public void dispose() {
-		game.batch.dispose();
+		assets.batch.dispose();
 	}
 
 		private float clock;
