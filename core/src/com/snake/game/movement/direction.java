@@ -1,6 +1,6 @@
 package com.snake.game.movement;
 
-public enum direction {
+public enum Direction {
     STATIONARY,
     MOVE_UP,
     MOVE_DOWN,

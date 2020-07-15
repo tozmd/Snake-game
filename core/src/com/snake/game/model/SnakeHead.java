@@ -1,11 +1,11 @@
 package com.snake.game.model;
 
-import com.snake.game.movement.direction;
+import com.snake.game.movement.Direction;
 
-public class SnakeHead extends SnakeObj {
+public class SnakeHead extends Snake {
     private float prevX;
     private float prevY;
-    public SnakeHead(direction dir, float x, float y){
+    public SnakeHead(Direction dir, float x, float y){
         super(dir,x,y);
     }
 

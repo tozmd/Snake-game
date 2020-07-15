@@ -9,7 +9,7 @@ import com.snake.game.model.SnakeBody;
 import com.snake.game.model.SnakeHead;
 import com.snake.game.movement.FoodController;
 import com.snake.game.movement.SnakeController;
-import com.snake.game.movement.direction;
+import com.snake.game.movement.Direction;
 
 public class GameScreen extends ScreenAdapter {
 	SnakeGame game;
@@ -26,7 +26,7 @@ public class GameScreen extends ScreenAdapter {
 	@Override
 	public void show() {
 		snakeBodies = new <SnakeBody>Array(288);
-		snakeHead = new SnakeHead(direction.MOVE_LEFT, 360,360);
+		snakeHead = new SnakeHead(Direction.MOVE_LEFT, 360,360);
 		food = new FoodObj(120, 120);
 		foodRandomizer = new FoodController();
 		controller = new SnakeController();
@@ -54,7 +54,7 @@ public class GameScreen extends ScreenAdapter {
 		clock += Gdx.graphics.getRawDeltaTime();
 		if(clock>0.15) {
 			controller.move(game.assets, snakeHead);
-			if(!controller.getDir().equals(com.snake.game.movement.direction.STATIONARY)) {
+			if(!controller.getDir().equals(Direction.STATIONARY)) {
 				controller.updateBody(snakeBodies, snakeHead);
 			}
 			clock = 0;

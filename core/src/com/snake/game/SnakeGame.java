@@ -3,7 +3,7 @@ package com.snake.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.snake.game.Assets.Assets;
+import com.snake.game.assets.Assets;
 
 public class SnakeGame extends Game {
     OrthographicCamera camera;

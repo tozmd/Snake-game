@@ -1,9 +1,9 @@
 package com.snake.game.model;
 
-import com.snake.game.movement.direction;
+import com.snake.game.movement.Direction;
 
-public class SnakeBody extends SnakeObj{
-    public SnakeBody(direction dir, float x, float y){
+public class SnakeBody extends Snake {
+    public SnakeBody(Direction dir, float x, float y){
         super(dir,x,y);
     }
     public static int getSnakeLength(){

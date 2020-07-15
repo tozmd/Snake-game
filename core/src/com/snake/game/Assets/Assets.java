@@ -1,4 +1,4 @@
-package com.snake.game.Assets;
+package com.snake.game.assets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

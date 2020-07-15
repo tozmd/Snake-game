@@ -7,22 +7,22 @@ import com.snake.game.GameOver;
 import com.snake.game.SnakeGame;
 import com.snake.game.model.FoodObj;
 import com.snake.game.model.SnakeBody;
-import com.snake.game.Assets.Assets;
+import com.snake.game.assets.Assets;
 import com.snake.game.model.SnakeHead;
 
 public class SnakeController {
     public void inputToMovement(Array<SnakeBody> snakeBodies) {
-        if (Gdx.input.isKeyPressed(Input.Keys.W) && !snakeBodies.get(0).getDirection().equals(com.snake.game.movement.direction.MOVE_DOWN)){
-            DirectionToMove = com.snake.game.movement.direction.MOVE_UP;
+        if (Gdx.input.isKeyPressed(Input.Keys.W) && !snakeBodies.get(0).getDirection().equals(Direction.MOVE_DOWN)){
+            DirectionToMove = Direction.MOVE_UP;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.S) && !snakeBodies.get(0).getDirection().equals(com.snake.game.movement.direction.MOVE_UP)) {
-            DirectionToMove = com.snake.game.movement.direction.MOVE_DOWN;
+        if (Gdx.input.isKeyPressed(Input.Keys.S) && !snakeBodies.get(0).getDirection().equals(Direction.MOVE_UP)) {
+            DirectionToMove = Direction.MOVE_DOWN;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.A) && !snakeBodies.get(0).getDirection().equals(com.snake.game.movement.direction.MOVE_RIGHT)){
-            DirectionToMove = com.snake.game.movement.direction.MOVE_LEFT;
+        if (Gdx.input.isKeyPressed(Input.Keys.A) && !snakeBodies.get(0).getDirection().equals(Direction.MOVE_RIGHT)){
+            DirectionToMove = Direction.MOVE_LEFT;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.D) && !snakeBodies.get(0).getDirection().equals(com.snake.game.movement.direction.MOVE_LEFT)){
-            DirectionToMove = com.snake.game.movement.direction.MOVE_RIGHT;
+        if (Gdx.input.isKeyPressed(Input.Keys.D) && !snakeBodies.get(0).getDirection().equals(Direction.MOVE_LEFT)){
+            DirectionToMove = Direction.MOVE_RIGHT;
         }
     }
 
@@ -52,40 +52,40 @@ public class SnakeController {
         int snakeLength = SnakeBody.getSnakeLength();
         for (int i = 0; i < numberToAdd; i++) {
             if (snakeBodies.isEmpty()) {
-                if(getDir().equals(com.snake.game.movement.direction.STATIONARY)){
-                    SnakeBody newSnakeBody = new SnakeBody(direction.STATIONARY, snakeHead.x + 40, snakeHead.y);
+                if(getDir().equals(Direction.STATIONARY)){
+                    SnakeBody newSnakeBody = new SnakeBody(Direction.STATIONARY, snakeHead.x + 40, snakeHead.y);
                     snakeBodies.add(newSnakeBody);
                 }
-                else if (getDir().equals(com.snake.game.movement.direction.MOVE_LEFT)) {
-                    SnakeBody newSnakeBody = new SnakeBody(direction.MOVE_LEFT, snakeHead.x + 40, snakeHead.y);
+                else if (getDir().equals(Direction.MOVE_LEFT)) {
+                    SnakeBody newSnakeBody = new SnakeBody(Direction.MOVE_LEFT, snakeHead.x + 40, snakeHead.y);
                     snakeBodies.add(newSnakeBody);
-                } else if (getDir().equals(direction.MOVE_RIGHT)) {
-                    SnakeBody newSnakeBody = new SnakeBody(direction.MOVE_RIGHT, snakeHead.x - 40, snakeHead.y);
+                } else if (getDir().equals(Direction.MOVE_RIGHT)) {
+                    SnakeBody newSnakeBody = new SnakeBody(Direction.MOVE_RIGHT, snakeHead.x - 40, snakeHead.y);
                     snakeBodies.add(newSnakeBody);
-                } else if (getDir().equals(direction.MOVE_DOWN)) {
-                    SnakeBody newSnakeBody = new SnakeBody(direction.MOVE_DOWN, snakeHead.x, snakeHead.y + 40);
+                } else if (getDir().equals(Direction.MOVE_DOWN)) {
+                    SnakeBody newSnakeBody = new SnakeBody(Direction.MOVE_DOWN, snakeHead.x, snakeHead.y + 40);
                     snakeBodies.add(newSnakeBody);
-                } else if (getDir().equals(com.snake.game.movement.direction.MOVE_UP)) {
-                    SnakeBody newSnakeBody = new SnakeBody(direction.MOVE_UP, snakeHead.x, snakeHead.y - 40);
+                } else if (getDir().equals(Direction.MOVE_UP)) {
+                    SnakeBody newSnakeBody = new SnakeBody(Direction.MOVE_UP, snakeHead.x, snakeHead.y - 40);
                     snakeBodies.add(newSnakeBody);
                 }
             }
             if (!snakeBodies.isEmpty()) {
-                if (snakeBodies.get(snakeLength).getDirection().equals(direction.STATIONARY)) {
-                    SnakeBody newSnakeBody = new SnakeBody(direction.STATIONARY, snakeBodies.get(snakeLength).getX() + 40, snakeBodies.get(snakeLength).getY());
+                if (snakeBodies.get(snakeLength).getDirection().equals(Direction.STATIONARY)) {
+                    SnakeBody newSnakeBody = new SnakeBody(Direction.STATIONARY, snakeBodies.get(snakeLength).getX() + 40, snakeBodies.get(snakeLength).getY());
                     snakeBodies.add(newSnakeBody);
                 }
-                else if (snakeBodies.get(snakeLength).getDirection().equals(direction.MOVE_LEFT)) {
-                    SnakeBody newSnakeBody = new SnakeBody(direction.MOVE_LEFT, snakeBodies.get(snakeLength).getX() + 40, snakeBodies.get(snakeLength).getY());
+                else if (snakeBodies.get(snakeLength).getDirection().equals(Direction.MOVE_LEFT)) {
+                    SnakeBody newSnakeBody = new SnakeBody(Direction.MOVE_LEFT, snakeBodies.get(snakeLength).getX() + 40, snakeBodies.get(snakeLength).getY());
                     snakeBodies.add(newSnakeBody);
-                } else if (snakeBodies.get(snakeLength).getDirection().equals(direction.MOVE_RIGHT)) {
-                    SnakeBody newSnakeBody = new SnakeBody(direction.MOVE_RIGHT, snakeBodies.get(snakeLength).getX() - 40, snakeBodies.get(snakeLength).getY());
+                } else if (snakeBodies.get(snakeLength).getDirection().equals(Direction.MOVE_RIGHT)) {
+                    SnakeBody newSnakeBody = new SnakeBody(Direction.MOVE_RIGHT, snakeBodies.get(snakeLength).getX() - 40, snakeBodies.get(snakeLength).getY());
                     snakeBodies.add(newSnakeBody);
-                } else if (snakeBodies.get(snakeLength).getDirection().equals(direction.MOVE_DOWN)) {
-                    SnakeBody newSnakeBody = new SnakeBody(direction.MOVE_DOWN, snakeBodies.get(snakeLength).getX(), snakeBodies.get(snakeLength).getY() + 40);
+                } else if (snakeBodies.get(snakeLength).getDirection().equals(Direction.MOVE_DOWN)) {
+                    SnakeBody newSnakeBody = new SnakeBody(Direction.MOVE_DOWN, snakeBodies.get(snakeLength).getX(), snakeBodies.get(snakeLength).getY() + 40);
                     snakeBodies.add(newSnakeBody);
-                } else if (snakeBodies.get(snakeLength).getDirection().equals(direction.MOVE_UP)) {
-                    SnakeBody newSnakeBody = new SnakeBody(direction.MOVE_UP, snakeBodies.get(snakeLength).getX(), snakeBodies.get(snakeLength).getY() - 40);
+                } else if (snakeBodies.get(snakeLength).getDirection().equals(Direction.MOVE_UP)) {
+                    SnakeBody newSnakeBody = new SnakeBody(Direction.MOVE_UP, snakeBodies.get(snakeLength).getX(), snakeBodies.get(snakeLength).getY() - 40);
                     snakeBodies.add(newSnakeBody);
                 }
             }
@@ -110,7 +110,7 @@ public class SnakeController {
         snakeHead.setPosition(360,360);
         food.setPosition(120,120);
         snakeBodies.clear();
-        setDir(direction.STATIONARY);
+        setDir(Direction.STATIONARY);
         assets.snakeHeadTex = assets.snakeLeftTex;
         SnakeBody.setSnakeLength(0);
     }
@@ -127,12 +127,12 @@ public class SnakeController {
         }
     }
 
-    public void setDir(direction newDir){
+    public void setDir(Direction newDir){
         DirectionToMove = newDir;
     }
 
-    public direction getDir(){
+    public Direction getDir(){
         return DirectionToMove;
     }
-    private direction DirectionToMove = direction.STATIONARY;
+    private Direction DirectionToMove = Direction.STATIONARY;
 }
