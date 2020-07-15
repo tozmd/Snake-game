@@ -7,7 +7,7 @@ import com.snake.game.screens.GameOver;
 import com.snake.game.SnakeGame;
 import com.snake.game.model.FoodObj;
 import com.snake.game.model.SnakeBody;
-import com.snake.game.assets.Assets;
+import com.snake.game.assetss.Assets;
 import com.snake.game.model.SnakeHead;
 
 public class SnakeController {

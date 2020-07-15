@@ -1,4 +1,4 @@
-package com.snake.game.assets;
+package com.snake.game.assetss;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
