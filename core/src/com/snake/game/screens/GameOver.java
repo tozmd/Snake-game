@@ -6,7 +6,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.snake.game.SnakeGame;
-import com.snake.game.assetss.Assets;
+import com.snake.game.assets.Assets;
 
 
 public class GameOver extends ScreenAdapter {

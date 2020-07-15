@@ -5,7 +5,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Array;
 import com.snake.game.SnakeGame;
-import com.snake.game.assetss.Assets;
+import com.snake.game.assets.Assets;
 import com.snake.game.model.FoodObj;
 import com.snake.game.model.SnakeBody;
 import com.snake.game.model.SnakeHead;
