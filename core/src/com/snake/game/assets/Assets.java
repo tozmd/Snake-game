@@ -18,12 +18,12 @@ public class Assets {
         background = new Texture(Gdx.files.internal("snakegameboard.jpg"));
         snakeFoodTex = new Texture(Gdx.files.internal("snakefood.png"));
         snakeLeftTex = new Texture(Gdx.files.internal("snakeleft.png"));
-        snakeUpTex = new Texture(Gdx.files.internal("snakeUp.png"));
-        snakeDownTex = new Texture(Gdx.files.internal("snakeDown.png"));
-        snakeRightTex = new Texture(Gdx.files.internal("snakeRight.png"));
+        snakeUpTex = new Texture(Gdx.files.internal("snakeup.png"));
+        snakeDownTex = new Texture(Gdx.files.internal("snakedown.png"));
+        snakeRightTex = new Texture(Gdx.files.internal("snakeright.png"));
         snakeHeadTex = new Texture(Gdx.files.internal("snakeleft.png"));
         snakeBodyTex = new Texture(Gdx.files.internal("snakebody.jpg"));
-        creatorName = new Texture(Gdx.files.internal("toastmakerr.png"));
+        creatorName = new Texture(Gdx.files.internal("username.png"));
         snakeTitle = new Texture(Gdx.files.internal("snaketitle.png"));
         gameMsg = new Texture(Gdx.files.internal("titlescreenmsg.png"));
         gameMessage = new Texture(Gdx.files.internal("titlescreenmsg.png"));
@@ -35,5 +35,25 @@ public class Assets {
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 680, 680);
+    }
+
+    public void dispose(){
+        background.dispose();
+        snakeBodyTex.dispose();
+        snakeLeftTex.dispose();
+        snakeUpTex.dispose();
+        snakeDownTex.dispose();
+        snakeRightTex.dispose();
+        snakeHeadTex.dispose();
+        snakeBodyTex.dispose();
+        creatorName.dispose();
+        snakeTitle.dispose();
+        gameMsg.dispose();
+        gameMessage.dispose();
+        transparentBG.dispose();
+        gameOverMsg.dispose();
+        gameOverMessage.dispose();
+        gameOverTitle.dispose();
+        winTitle.dispose();
     }
 }

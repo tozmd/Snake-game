@@ -59,6 +59,7 @@ public class TitleScreen extends ScreenAdapter {
         Gdx.input.setInputProcessor(null);
         assets.batch.dispose();
     }
+
     private float clock;
     private float msgSwitch = 1;
 }
