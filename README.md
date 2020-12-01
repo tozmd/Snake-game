@@ -2,8 +2,8 @@
  This game is my iteration of the classic Snake game where the purpose is to eat as many pies as you can!
  
  <div>
-    <img width="400px" height="240px" hspace="15" src="https://github.com/tozmd/Snake-game/tree/master/android/assets/previews/mainmenu.png">
-    <img width="400px" height="240px" hspace="15" src="https://github.com/tozmd/Snake-game/tree/master/android/assets/previews/gamescreen.png">
+    <img width="400px" height="400px" hspace="15" src="images/mainmenu.png">
+    <img width="400px" height="400px" hspace="15" src="images/gamescreen.png">
 </div>
 
 ## Downloads
