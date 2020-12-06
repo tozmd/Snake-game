@@ -73,6 +73,7 @@ task addSource {
     }
 }
 
+
 tasks.compileGwt.dependsOn(addSource)
 tasks.draftCompileGwt.dependsOn(addSource)
 

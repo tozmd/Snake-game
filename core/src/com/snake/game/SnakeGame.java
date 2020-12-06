@@ -1,5 +1,4 @@
 package com.snake.game;
-
 import com.badlogic.gdx.Game;
 import com.snake.game.screens.TitleScreen;
 
