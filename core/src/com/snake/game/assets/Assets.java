@@ -13,6 +13,9 @@ public class Assets {
     public SnakeGame game;
     public OrthographicCamera camera;
     public SpriteBatch batch;
+    public static final int SNAKE_BODY_WIDTH = 40;
+    public static final int SNAKE_BODY_HEIGHT = 40;
+
 
     public void loadAssets(){
         background = new Texture(Gdx.files.internal("snakegameboard.jpg"));

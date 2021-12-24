@@ -5,8 +5,8 @@ import com.snake.game.movement.Direction;
 public class SnakeHead extends Snake {
     private float prevX;
     private float prevY;
-    public SnakeHead(Direction dir, float x, float y){
-        super(dir,x,y);
+    public SnakeHead(Direction dir, float x, float y, boolean verticalFacing){
+        super(dir,x,y, verticalFacing);
     }
 
     public float getPrevX(){return prevX;}

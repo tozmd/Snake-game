@@ -31,7 +31,7 @@ public class GameScreen extends ScreenAdapter {
 		assets = new Assets();
 		assets.loadAssets();
 		snakeBodies = new <SnakeBody>Array(288);
-		snakeHead = new SnakeHead(Direction.MOVE_LEFT, 360,360);
+		snakeHead = new SnakeHead(Direction.MOVE_LEFT, 360,360, false);
 		food = new FoodObj(120, 120);
 		foodRandomizer = new FoodController();
 		controller = new SnakeController();
@@ -49,10 +49,11 @@ public class GameScreen extends ScreenAdapter {
 		assets.batch.draw(assets.snakeHeadTex, snakeHead.getX(), snakeHead.getY());
 		assets.batch.draw(assets.snakeFoodTex, food.getX(), food.getY());
 		if(SnakeBody.getSnakeLength() == 0){
-			controller.addBody(2, snakeBodies, snakeHead);
+			controller.addBody(2, snakeBodies, snakeHead, false);
 		}
 		for (int i = 0; i < SnakeBody.getSnakeLength(); i++) {
-			assets.batch.draw(assets.snakeBodyTex, snakeBodies.get(i).getX(), snakeBodies.get(i).getY());
+			assets.batch.draw(assets.snakeBodyTex, snakeBodies.get(i).getX(), snakeBodies.get(i).getY(), snakeBodies.get(0).getWidth(),
+					snakeBodies.get(0).getHeight(), 0, 0, Assets.SNAKE_BODY_WIDTH, Assets.SNAKE_BODY_HEIGHT, false, false);
 		}
 
 		assets.batch.end();
@@ -65,7 +66,7 @@ public class GameScreen extends ScreenAdapter {
 			clock = 0;
 		}
 		if(food.overlaps(snakeHead)) {
-			controller.addBody(1, snakeBodies, snakeHead);
+			controller.addBody(1, snakeBodies, snakeHead, false);
 			foodRandomizer.moveFood(game, food, snakeHead, snakeBodies);
 		}
 		controller.inputToMovement(snakeBodies);
